@@ -8,3 +8,9 @@ export async function POST(request) {
     await Expense.create({ type, cost, description, date });
     return NextResponse.json({ message: 'Expense Created' }, { status: 201 });
 }
+
+export async function GET() {
+    await connectMongoDB();
+    const expenses = await Expense.find();
+    return NextResponse.json({ expenses });
+}
